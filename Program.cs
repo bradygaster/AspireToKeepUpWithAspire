@@ -18,8 +18,8 @@ class Program
         var prContext = await fetcher.GetMergedPullRequestsThisMonthAsync("dotnet", "aspire");
         var prompt = await File.ReadAllTextAsync("prompt.txt");
 
-        //var aiClient = new OpenAiClient();
-        var aiClient = new AzureAiClient();
+        var aiClient = new OpenAiClient();
+        //var aiClient = new AzureAiClient();
         var markdown = await aiClient.GetPullRequestSummaryAsync(prompt, prContext);
 
         string outputDir = Directory.GetCurrentDirectory();
