@@ -1,7 +1,7 @@
 Please review all pull requests that have been merged into the https://github.com/dotnet/aspire repository from the first day of the current month until today.
 
 At the top of the output, include a markdown-formatted title using this format:  
-`# .NET Aspire Updates: {Month Day, Year} – {Month Day, Year}`  
+`# .NET Aspire Updates: {DateTime.UtcNow:MMMM d, yyyy} – {DateTime.UtcNow:MMMM d, yyyy}`  
 Follow this with a short introductory paragraph like:  
 `Here’s a roundup of improvements made to .NET Aspire during this period. Each change enhances developer experience, expands platform support, or improves stability.`
 

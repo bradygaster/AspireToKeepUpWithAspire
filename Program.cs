@@ -5,17 +5,21 @@ namespace AspireToKeepUpWithAspire;
 
 public interface IAiClient
 {
-    Task<string> GetPullRequestSummaryAsync(string prompt);
+    Task<string> GetPullRequestSummaryAsync(string prompt, string context);
 }
 
 class Program
 {
     static async Task Main()
     {
+        string githubToken = Environment.GetEnvironmentVariable("GH_TOKEN") ?? throw new InvalidOperationException("Missing GH_TOKEN env var");
+
+        var fetcher = new GitHubPullRequestFetcher(githubToken);
+        var prContext = await fetcher.GetMergedPullRequestsThisMonthAsync("dotnet", "aspire");
         var prompt = await File.ReadAllTextAsync("prompt.txt");
 
         var aiClient = new OpenAiClient();
-        var markdown = await aiClient.GetPullRequestSummaryAsync(prompt);
+        var markdown = await aiClient.GetPullRequestSummaryAsync(prompt, prContext);
 
         string outputDir = Directory.GetCurrentDirectory();
         string markdownPath = Path.Combine(outputDir, "Aspire-PR-Summary.md");

@@ -6,7 +6,7 @@ namespace AspireToKeepUpWithAspire;
 
 public class AzureAiClient : IAiClient
 {
-    public async Task<string> GetPullRequestSummaryAsync(string prompt)
+    public async Task<string> GetPullRequestSummaryAsync(string prompt, string context)
     {
         var azureOpenAi = new AzureOpenAIClient(
             new Uri(Environment.GetEnvironmentVariable("AZURE_OPENAI_ENDPOINT") ?? throw new InvalidOperationException("Missing configuration: AZURE_OPENAI_ENDPOINT.")),
@@ -15,11 +15,14 @@ public class AzureAiClient : IAiClient
 
         var chatClient = azureOpenAi.AsChatClient(Environment.GetEnvironmentVariable("MODEL_NAME") ?? throw new InvalidOperationException("Missing configuration: MODEL_NAME."));
 
-        List<ChatMessage> messages = new();
+        var messages = new List<ChatMessage>
+        {
+            new ChatMessage(ChatRole.System, prompt),
+            new ChatMessage(ChatRole.User, context)
+        };
+
         CancellationTokenSource? currentResponseCancellation = new();
         ChatOptions chatOptions = new();
-        var message = new ChatMessage(ChatRole.System, prompt);
-        messages.Add(message);
         var responseText = new TextContent("");
         var responseMessage = new ChatMessage(ChatRole.Assistant, [responseText]);
 

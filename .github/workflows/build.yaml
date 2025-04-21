@@ -12,6 +12,7 @@ env:
   AZURE_OPENAI_API_KEY: ${{ secrets.AZURE_OPENAI_API_KEY }}
   MODEL_NAME: ${{ secrets.MODEL_NAME }}
   OPEN_AI_KEY: ${{ secrets.OPEN_AI_KEY }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   deploy:
