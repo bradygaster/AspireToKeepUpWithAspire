@@ -36,7 +36,7 @@ jobs:
     - name: 📦 Prepare static output
       run: |
         mkdir publish
-        cp default.html publish
+        cp index.html publish
 
     - name: 🔐 Login to Azure via OIDC
       uses: azure/login@v2
