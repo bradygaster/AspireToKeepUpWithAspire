@@ -25,7 +25,7 @@ jobs:
         dotnet restore
         dotnet build --configuration Release
 
-    - name: Where are we on disk?
+    - name: 🔧 View directory structure
       run: | 
         ls -la
         find . -name "*.csproj"
