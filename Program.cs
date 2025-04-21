@@ -46,7 +46,7 @@ This summary is intended to fit on a single webpage and should be readable at a 
 
             string outputDir = Directory.GetCurrentDirectory();
             string markdownPath = Path.Combine(outputDir, "Aspire-PR-Summary.md");
-            string htmlPath = Path.Combine(outputDir, "index.html");
+            string htmlPath = Path.Combine(outputDir, "default.html");
 
             await File.WriteAllTextAsync(markdownPath, markdown, new UTF8Encoding(false));
 
