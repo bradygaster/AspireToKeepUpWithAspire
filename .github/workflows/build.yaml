@@ -1,4 +1,4 @@
-﻿name: Deploy to Azure using OIDC
+﻿name: Build and deploy Aspire Updates
 
 on:
   workflow_dispatch:
