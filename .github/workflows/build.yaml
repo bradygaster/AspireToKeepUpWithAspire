@@ -30,7 +30,6 @@ jobs:
         mkdir publish
         cp index.html publish/
         cp template.html publish/ || true
-        cp Aspire-PR-Summary.md publish/ || true
         zip -r publish.zip publish
 
     - name: ☁️ Deploy to Azure App Service
