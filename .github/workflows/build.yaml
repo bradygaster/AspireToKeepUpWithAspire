@@ -25,6 +25,11 @@ jobs:
         dotnet restore
         dotnet build --configuration Release
 
+    - name: Where are we on disk?
+      run: | 
+        ls -la
+        find . -name "*.csproj"
+
     - name: 🚀 Run generator
       run: dotnet run
 
