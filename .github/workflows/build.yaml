@@ -1,10 +1,17 @@
-﻿name: Build and Deploy Aspire PR Summary
+﻿name: Deploy to Azure using OIDC
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -16,25 +23,28 @@ jobs:
       with:
         dotnet-version: '9.0.x'
 
-    - name: 🔧 Restore dependencies
-      run: dotnet restore
+    - name: 🔧 Restore and Build
+      run: |
+        dotnet restore
+        dotnet build --configuration Release
 
-    - name: 🏗️ Build the app
-      run: dotnet build --configuration Release
-
-    - name: 🚀 Run the console app
+    - name: 🚀 Run generator
       run: dotnet run --configuration Release
 
-    - name: 📦 Zip output (index.html, template.html, etc.)
+    - name: 📦 Prepare static output
       run: |
         mkdir publish
-        cp index.html publish/
-        cp template.html publish/ || true
-        zip -r publish.zip publish
+        cp index.html publish
 
-    - name: ☁️ Deploy to Azure App Service
+    - name: 🔐 Login to Azure via OIDC
+      uses: azure/login@v1
+      with:
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+    - name: ☁️ Deploy static content to App Service
       uses: azure/webapps-deploy@v2
       with:
-        app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        package: publish.zip
+        app-name: ${{ secrets.AZURE_APP_NAME }}
+        package: publish
