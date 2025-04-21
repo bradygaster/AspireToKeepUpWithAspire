@@ -72,6 +72,13 @@
         } else {
             document.body.classList.add('light-mode');
         }
+
+        window.onload = () => {
+            document.querySelectorAll('a').forEach(link => {
+              link.setAttribute('target', '_blank');
+              link.setAttribute('rel', 'noopener noreferrer');
+            });
+          };
     </script>
 </body>
 </html>
