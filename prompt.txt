@@ -1,0 +1,16 @@
+Please review all pull requests that have been merged into the https://github.com/dotnet/aspire repository from the first day of the current month until today.
+
+At the top of the output, include a markdown-formatted title using this format:  
+`# .NET Aspire Updates: {Month Day, Year} – {Month Day, Year}`  
+Follow this with a short introductory paragraph like:  
+`Here’s a roundup of improvements made to .NET Aspire during this period. Each change enhances developer experience, expands platform support, or improves stability.`
+
+Then, summarize each pull request with a one-sentence description that focuses on how it improves .NET Aspire for customers using it to build applications. Include a link to the pull request.
+
+Group the summaries by high-level SDK area or component (e.g., Dashboard, Kubernetes, Docker, CLI, Hosting, Testing). Use an appropriate emoji to label each section heading.
+
+After each summary, include a line labeled “Related issue(s):” with links to any related GitHub issues. If there are no associated issues, write “None.”
+
+The final output must be valid markdown-formatted text, suitable for saving to a `.md` file or displaying in markdown viewers. Use proper markdown headings, bolded PR titles, consistent indentation, and spacing for readability.
+
+This summary is intended to fit on a single webpage and should be readable at a glance.
